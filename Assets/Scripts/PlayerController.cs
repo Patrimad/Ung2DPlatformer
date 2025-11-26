@@ -10,7 +10,16 @@ public class PlayerController : MonoBehaviour
     private float moveInput;
     public LayerMask groundLayer;
     public KeyCode jumpKey = KeyCode.Space;
+
+    [Header("Dash")] 
+    public KeyCode dashKey;
+    public float dashForce = 15f;
+    public float dashDuration = 0.2f;
+    public float dashCooldown = 0.5f;
+    private bool isDashing = false;
+    private float dashTimer;
     
+    private bool canDash = true;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -25,7 +34,16 @@ public class PlayerController : MonoBehaviour
         {
             rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
         }
-        
+
+        if (Input.GetKey(dashKey) && canDash)
+        {
+            StartDash();
+        }
+
+        if (isDashing)
+        {
+            
+        }
     }
 
     void FixedUpdate()
@@ -46,5 +64,9 @@ public class PlayerController : MonoBehaviour
         {
             return false;
         }
+    }
+    void StartDash()
+    {
+            
     }
 }
